@@ -9,7 +9,20 @@ namespace LRUcache
     {
         key_t key;
         value_t value;
-
+	Node *next;
+	Node *prev;
+	Node(key_t k, value_t v, Node *n=NULL, Node *p=NULL)
+	{
+		key = k;
+		value = v;
+		next = n;
+		prev = p;
+	}
+	Node()
+	{
+		next = NULL;
+		prev = NULL;
+	}
     };
 
 
@@ -17,10 +30,22 @@ namespace LRUcache
     class LRUcache
     {
     public:
-
-
+	LRUcache(size_t size=10);
+	~LRUcache();
+	bool put(key_t key, value_t value); //put success or failed
+	value_t get(key_t key); //get success or failed?
+	int getMissCount();
     private:
-
+	int size;
+	int maxSize;
+	Node<key_t,value_t> *head, *tail; //head node and tail node
+	int count; // count the times of misses
+	unordered_map<key_t, Node<key_t, value_t> *> m; // map a key to the node;
+	unordered_map<key_t, Node<key_t, value_t> *>::iterator iter
+	//vector<Node<key_t, value_t> *> emptyEntries; // store the address of current empty addresses;
+	void print(); 
+	bool setHead(Node<key_t, value_t> *node);
+	bool remove(Node<key_t, value_t> *node);
     };
 }
 
