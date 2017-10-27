@@ -1,6 +1,8 @@
 #ifndef LRUCACHE_H_INCLUDED
 #define LRUCACHE_H_INCLUDED
 
+#include<iostream>
+#include<unordered_map>
 namespace LRUcache
 {
     //The linked list
@@ -40,8 +42,9 @@ namespace LRUcache
 	int maxSize;
 	Node<key_t,value_t> *head, *tail; //head node and tail node
 	int count; // count the times of misses
-	unordered_map<key_t, Node<key_t, value_t> *> m; // map a key to the node;
-	unordered_map<key_t, Node<key_t, value_t> *>::iterator iter
+	std::unordered_map<key_t, Node<key_t, value_t> *> m; // map a key to the node;
+	typename std::unordered_map<key_t, Node<key_t, value_t> *>::iterator iter;
+	//need 'typename' here to make sure that this is a declaration of variable rather than a type
 	//vector<Node<key_t, value_t> *> emptyEntries; // store the address of current empty addresses;
 	void print(); 
 	bool setHead(Node<key_t, value_t> *node);

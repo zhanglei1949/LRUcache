@@ -1,6 +1,6 @@
-#include<LRUcache.h>
+#include "LRUcache.h"
 #include<assert.h>
-#include<iostram>
+#include<iostream>
 namespace LRUcache
 {
 	template<typename key_t, typename value_t>
