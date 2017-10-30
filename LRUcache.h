@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<unordered_map>
-namespace LRUcache
+namespace lei
 {
     //The linked list
     template<typename key_t, typename value_t>
@@ -32,12 +32,13 @@ namespace LRUcache
     class LRUcache
     {
     public:
-	LRUcache(size_t size=10);
+	LRUcache(size_t size_=10);
 	~LRUcache();
 	bool put(key_t key, value_t value); //put success or failed
 	value_t get(key_t key); //get success or failed?
 	int getMissCount();
-    private:
+    	void print();
+	private:
 	int size;
 	int maxSize;
 	Node<key_t,value_t> *head, *tail; //head node and tail node
@@ -46,10 +47,11 @@ namespace LRUcache
 	typename std::unordered_map<key_t, Node<key_t, value_t> *>::iterator iter;
 	//need 'typename' here to make sure that this is a declaration of variable rather than a type
 	//vector<Node<key_t, value_t> *> emptyEntries; // store the address of current empty addresses;
-	void print(); 
+	//void print(); 
 	bool setHead(Node<key_t, value_t> *node);
-	bool remove(Node<key_t, value_t> *node);
-    };
+	bool removeNode(Node<key_t, value_t> *node);
+    	bool removeLastNode();
+	};
 }
 
 #endif // LRUCACHE_H_INCLUDED
